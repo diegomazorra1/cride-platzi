@@ -277,3 +277,8 @@ cride/media/
 .env
 .envs/*
 !.envs/.local/
+
+
+# pycharm
+
+.idea/
