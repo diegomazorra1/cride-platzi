@@ -8,7 +8,7 @@ APPS_DIR = ROOT_DIR.path('cride')
 env = environ.Env()
 
 # Base
-DEBUG = env.bool('DJANGO_DEBUG', False)
+DEBUG = env.bool('DJANGO_DEBUG', True)
 
 # Language and timezone
 TIME_ZONE = 'America/Mexico_City'
@@ -160,7 +160,13 @@ CELERYD_TASK_SOFT_TIME_LIMIT = 60
 # Django REST Framework
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': (
-        'rest_framework.renderers.BrowsableAPIRenderer',
         'rest_framework.renderers.JSONRenderer',
-    )
+        'rest_framework.renderers.BrowsableAPIRenderer',
+
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 3,
 }
