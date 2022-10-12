@@ -33,8 +33,10 @@ class UserModelSerializer(serializers.ModelSerializer):
             'first_name',
             'last_name',
             'email',
-            'phone_number'
+            'phone_number',
+            'profile'
         )
+        depth = 1
 
 
 class UserLoginSerializer(serializers.Serializer):

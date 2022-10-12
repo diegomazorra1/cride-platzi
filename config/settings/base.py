@@ -8,7 +8,7 @@ APPS_DIR = ROOT_DIR.path('cride')
 env = environ.Env()
 
 # Base
-DEBUG = env.bool('DJANGO_DEBUG', True)
+DEBUG = env.bool('DJANGO_DEBUG', False)
 
 # Language and timezone
 TIME_ZONE = 'America/Mexico_City'
