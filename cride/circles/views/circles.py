@@ -13,6 +13,10 @@ from cride.circles.models import Circle, Membership
 # Permissions
 from cride.circles.permissions import IsCircleAdmin
 
+#Filters
+from rest_framework.filters import SearchFilter, OrderingFilter
+from django_filters.rest_framework import DjangoFilterBackend
+
 
 
 class CircleViewSet(mixins.CreateModelMixin,
@@ -23,6 +27,13 @@ class CircleViewSet(mixins.CreateModelMixin,
     """Circle view set."""
     lookup_field = 'slug_name'
     serializer_class = CircleModelSerializer
+
+    # Filters
+    filter_backends = (SearchFilter, OrderingFilter, DjangoFilterBackend)
+    search_fields = ('slug_name', 'name')
+    ordering_fields = ('rides_offered', 'rides_taken', 'name', 'created', 'member_list')
+    ordering = ('-members__count', '-rides_offered', '-rides_taken')
+    filter_fields = ('verified', 'is_limited')
 
     def get_queryset(self):
         """Restrict list to public only"""
