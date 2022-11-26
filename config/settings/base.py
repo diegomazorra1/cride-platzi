@@ -27,6 +27,9 @@ DATABASES['default']['ATOMIC_REQUESTS'] = True
 # URLs
 ROOT_URLCONF = 'config.urls'
 
+
+ASGI_APPLICATION = "config.asgi.application"
+
 # WSGI
 WSGI_APPLICATION = 'config.wsgi.application'
 
@@ -46,7 +49,8 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
-    'django_filters'
+    'django_filters',
+    'channels',
 ]
 LOCAL_APPS = [
     'cride.user',
@@ -171,4 +175,13 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 3,
+}
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
 }
